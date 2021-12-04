@@ -1,8 +1,13 @@
 {
-    "plugins": ["prettier", "import"],
+    "plugins": [
+        "prettier",
+        "import",
+        "@typescript-eslint"
+    ],
     "extends": [
         "plugin:prettier/recommended",
-        "prettier"
+        "prettier",
+        "airbnb-base"
     ],
     "parserOptions": {
         "ecmaVersion": 12,
@@ -13,14 +18,8 @@
         "browser": true,
         "node": true
     },
-    "extends": [
-        "airbnb-base"
-    ],
     "parser": "@typescript-eslint/parser",
 
-    "plugins": [
-        "@typescript-eslint"
-    ],
     "rules": {
         "no-debugger": "off",
         "no-console": 0,
