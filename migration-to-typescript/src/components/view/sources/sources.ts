@@ -1,9 +1,5 @@
 import './sources.css';
-
-interface ISources {
-  id: string;
-  name: string;
-}
+import { ISources } from '../../interface';
 
 class Sources {
   draw(data: ISources[]): void {

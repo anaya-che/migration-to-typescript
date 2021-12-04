@@ -1,15 +1,5 @@
 import './news.css';
-
-interface INews {
-  author: string;
-  content: string;
-  description: string;
-  publishedAt: string;
-  source: {id: string, name: string};
-  title: string;
-  url: string;
-  urlToImage: string;
-}
+import { INews } from '../../interface';
 
 class News {
   draw(data: INews[]): void {
