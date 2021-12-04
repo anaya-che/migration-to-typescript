@@ -14,4 +14,9 @@ interface INews {
   urlToImage: string;
 }
 
-export { ISources, INews };
+interface IView {
+  sources?: ISources[];
+  articles?: INews[];
+}
+
+export { ISources, INews, IView };
