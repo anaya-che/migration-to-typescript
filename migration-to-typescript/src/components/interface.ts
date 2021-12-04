@@ -19,4 +19,14 @@ interface IView {
   articles?: INews[];
 }
 
-export { ISources, INews, IView };
+interface IOptions {
+  apiKey?: string;
+  sources?: string | undefined;
+}
+
+export {
+  ISources,
+  INews,
+  IView,
+  IOptions,
+};
