@@ -24,10 +24,12 @@ class News {
 
       if (idx % 2) newsItem.classList.add('alt');
 
-      newsMetaPhoto.style.backgroundImage = `url(${
-        item.urlToImage || 'img/news_placeholder.jpg'
-      })`;
-      newsMetaAuthor.textContent = item.author || item.source.name;
+      if (item.urlToImage !== 'null') newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
+      // else newsMetaPhoto.style.backgroundImage = 'url("img/news_placeholder.jpg")';
+
+      if (item.author !== 'null') newsMetaAuthor.textContent = item.author;
+      else newsMetaAuthor.textContent = item.source.name;
+
       newsMetaDate.textContent = item.publishedAt
         .slice(0, 10)
         .split('-')
@@ -36,7 +38,9 @@ class News {
 
       newsDescriptionTitle.textContent = item.title;
       newsDescriptionSource.textContent = item.source.name;
-      newsDescriptionContent.textContent = item.description;
+
+      if (item.description !== 'null') newsDescriptionContent.textContent = item.description;
+
       newsReadMore.setAttribute('href', item.url);
 
       fragment.append(newsClone);

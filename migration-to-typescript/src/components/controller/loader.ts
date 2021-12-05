@@ -1,11 +1,13 @@
-import { IOptions } from '../interface';
+import {
+  IOptions, Callback, IResponse, ISources, INews, ErrorCodes,
+} from '../interface';
 
 class Loader {
   baseLink: string;
 
-  options: { apiKey: string };
+  options: IOptions;
 
-  constructor(baseLink: string, options: { apiKey: string }) {
+  constructor(baseLink: string, options: IOptions) {
     this.baseLink = baseLink;
     this.options = options;
   }
@@ -19,9 +21,9 @@ class Loader {
     this.load('GET', endpoint, callback, options);
   }
 
-  errorHandler(res: Response) {
-    if (!res.ok) {
-      if (res.status === 401 || res.status === 404) {
+  errorHandler(res: Response): Response {
+    if (res.status !== ErrorCodes.OK) {
+      if (res.status === ErrorCodes.Unauthorized || res.status === ErrorCodes.NotFound) {
         console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
       }
       throw Error(res.statusText);
@@ -30,7 +32,7 @@ class Loader {
     return res;
   }
 
-  makeUrl(options: IOptions, endpoint: string) {
+  makeUrl(options: Partial<IOptions>, endpoint: string): string {
     const urlOptions: IOptions = { ...this.options, ...options };
 
     let url: string = `${this.baseLink}${endpoint}?`;
@@ -45,13 +47,13 @@ class Loader {
   load(
     method: string,
     endpoint: string,
-    callback: any,
-    options: IOptions = {},
+    callback: Callback<ISources | INews>,
+    options: Partial<IOptions> = {},
   ): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then(this.errorHandler)
-      .then((res) => res.json())
-      .then((data) => callback(data))
+      .then((res: Response) => res.json())
+      .then((data: IResponse<ISources | INews>) => callback(data))
       .catch((err: string) => console.error(err));
   }
 }
