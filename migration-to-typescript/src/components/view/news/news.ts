@@ -27,7 +27,7 @@ class News {
       if (item.urlToImage !== 'null') newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
       // else newsMetaPhoto.style.backgroundImage = 'url("img/news_placeholder.jpg")';
 
-      if (item.author !== 'null') newsMetaAuthor.textContent = item.author;
+      if (item.author) newsMetaAuthor.textContent = item.author;
       else newsMetaAuthor.textContent = item.source.name;
 
       newsMetaDate.textContent = item.publishedAt
@@ -38,9 +38,7 @@ class News {
 
       newsDescriptionTitle.textContent = item.title;
       newsDescriptionSource.textContent = item.source.name;
-
-      if (item.description !== 'null') newsDescriptionContent.textContent = item.description;
-
+      newsDescriptionContent.textContent = item.description;
       newsReadMore.setAttribute('href', item.url);
 
       fragment.append(newsClone);
