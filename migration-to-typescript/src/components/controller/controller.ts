@@ -15,8 +15,8 @@ class AppController extends AppLoader {
 
   getNews(e: MouseEvent, callback: Callback<INews>): void {
     let target = <HTMLElement>e.target;
-
     const newsContainer = <HTMLElement>e.currentTarget;
+    this.addActiveButton(e);
 
     while (target !== newsContainer) {
       if (target.classList.contains('source__item')) {
@@ -37,6 +37,21 @@ class AppController extends AppLoader {
         return;
       }
       target = <HTMLElement>target.parentNode;
+    }
+  }
+
+  addActiveButton(e: MouseEvent): void {
+    const target = <HTMLElement>e.target;
+    const closest = <HTMLElement>target.closest('.source__item');
+    if (closest) {
+      const buttonElements: NodeList = document.querySelectorAll('.source__item');
+
+      buttonElements.forEach((el: Node) => {
+        const item = <HTMLElement>el;
+        if (item.classList.contains('active')) item.classList.remove('active');
+      });
+
+      closest.classList.add('active');
     }
   }
 }
