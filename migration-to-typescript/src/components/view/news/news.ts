@@ -25,7 +25,6 @@ class News {
       if (idx % 2) newsItem.classList.add('alt');
 
       if (item.urlToImage !== 'null') newsMetaPhoto.style.backgroundImage = `url(${item.urlToImage})`;
-      // else newsMetaPhoto.style.backgroundImage = 'url("img/news_placeholder.jpg")';
 
       if (item.author) newsMetaAuthor.textContent = item.author;
       else newsMetaAuthor.textContent = item.source.name;

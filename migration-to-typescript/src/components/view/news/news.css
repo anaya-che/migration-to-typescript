@@ -1,3 +1,10 @@
+.news {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: calc(100% - 245px);
+}
+
 .news__item {
   display: flex;
   flex-direction: column;
@@ -163,4 +170,13 @@
   .news__item.alt .news__meta-details {
     padding-left: 25px;
   }
+}
+
+@media (max-width: 640px) {
+
+  .news {
+    position: unset;
+    width: 100%;
+  }
+
 }
