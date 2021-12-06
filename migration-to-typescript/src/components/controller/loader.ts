@@ -52,9 +52,9 @@ class Loader {
   ): void {
     fetch(this.makeUrl(options, endpoint), { method })
       .then(this.errorHandler)
-      .then((res: Response) => res.json())
-      .then((data: IResponse<ISources | INews>) => callback(data))
-      .catch((err: string) => console.error(err));
+      .then((res: Response): Promise<IResponse<ISources | INews>> => res.json())
+      .then((data: IResponse<ISources | INews>): void => callback(data))
+      .catch((err: string): void => console.error(err));
   }
 }
 
